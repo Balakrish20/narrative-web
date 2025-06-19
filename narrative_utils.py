@@ -1,24 +1,9 @@
-import tkinter as tk
-from tkinter import ttk, messagebox
 import pandas as pd
-from datetime import datetime
 from dateutil import parser
 import inflect
+
 p = inflect.engine()
 
-# ---------- App Setup ----------
-root = tk.Tk()
-root.title("Excel Narrative Generator")
-root.geometry("1200x700")
-
-style = ttk.Style()
-style.theme_use('clam')
-style.configure("TButton", font=('Segoe UI', 10, 'bold'), padding=6, relief="flat",
-                foreground="white", background="#007acc")
-style.map("TButton", background=[('active', '#005f99')])
-style.configure("TNotebook.Tab", padding=[10, 5], font=('Segoe UI', 10, 'bold'))
-
-# ---------- Helpers ----------
 def get_value_or_default(val, default="unknown"):
     return default if pd.isna(val) or str(val).strip() == "" else str(val).strip()
 
@@ -34,6 +19,8 @@ def build_narrative(group):
     regulatory_ID = get_value_or_default(row.get("regulatory_ID"))
     case_justification = get_value_or_default(row.get("case_justification"))
     case_type = get_value_or_default(row.get("case_type"))
+    return f"Case {regulatory_ID}: A {case_type} case with justification '{case_justification}'."
+    row = group.iloc[0]
     reporter = get_value_or_default(row.get("reporter_type")).lower()
     title = get_value_or_default(row.get("publication_title"))
     country = get_value_or_default(row.get("country"))
