@@ -1,0 +1,12 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+textarea {
+  font-family: monospace;
+}
+pre {
+  background: #f9f9f9;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
